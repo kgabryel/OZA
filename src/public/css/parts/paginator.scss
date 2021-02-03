@@ -1,0 +1,10 @@
+.paginator > nav {
+  display: inline-block;
+}
+
+.page-item.active {
+  cursor: alias;
+}
+.paginator {
+  padding-top: 30px;
+}

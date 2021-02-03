@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-6">
+        <form action="{% block deletePath %}{% endblock %}" method="post">
+            <input type="hidden" name="_method" value="delete"/>
+            <button type="submit"
+                    class="btn btn-danger btn-block my-4 delete-button"
+                    data-toggle="modal"
+                    data-target="#deleteModal">
+                <span class="uncheck-icon"></span>
+                Usuń
+            </button>
+        </form>
+    </div>
+    <div class="col-6">
+        <a href="{% block backPath %}{% endblock %}">
+            <button type="button"
+                    class="btn btn-info btn-block my-4">
+                <span class="left-arrow-icon"></span>
+                Powrót
+            </button>
+        </a>
+    </div>
+</div>

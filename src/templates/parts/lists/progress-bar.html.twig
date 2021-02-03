@@ -1,0 +1,14 @@
+{% if list.positions|length ==0 %}
+    <span>Brak produktów na liście</span>
+{% else %}
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+         aria-valuenow="{{list.getChecked()|length}}"
+         aria-valuemin="0" aria-valuemax="{{list.positions|length}}" style="width:{{list.getChecked()|length/list.positions|length*100}}%">
+        {% if list.getChecked()|length != 0 %}
+            {{list.getChecked()|length}}/{{list.positions|length}}
+        {% endif %}
+    </div>
+    {% if list.getChecked()|length == 0%}
+        {{list.getChecked()|length}}/{{list.positions|length}}
+    {% endif %}
+{% endif %}

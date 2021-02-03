@@ -1,0 +1,13 @@
+{% set listTemplate = 'quick-lists/list.html.twig' %}
+{% extends "parts/lists/index.html.twig" %}
+{% block modals %}
+    {% include 'modals/lists/quick-lists/create.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/quick-lists/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/lists/quick-lists/index.js') }}"></script>
+{% endblock %}

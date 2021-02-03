@@ -1,0 +1,76 @@
+{% extends "theme/table-view.html.twig" %}
+{% block table_name %}Sklepy{% endblock %}
+{% block table_nav %}
+    <form method="GET" action="{{ path('shops.index') }}">
+        <div class="row">
+            <div class="col-10 offset-1 col-sm-5 offset-sm-1">
+                {{ form_widget(findForm.name, {checked: false}) }}
+            </div>
+            <div class="col-10 offset-1 offset-sm-0 col-sm-5">
+                {{ form_widget(findForm.description, {checked: false}) }}
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-info btn-block my-4 waves-effect waves-light" type="submit">
+                    <span class="search-icon"></span>
+                    Szukaj
+                </button>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block">
+                {{ paginate(paginator) }}
+            </div>
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-default btn-block my-4 waves-effect waves-light clear-button" type="button">
+                    <span class="clear-icon"></span>
+                    Czyść
+                </button>
+            </div>
+            <div class="col-10 d-lg-none">
+                {{ paginate(paginator) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block table_header %}
+    <th>Nazwa</th>
+    <th>Opis</th>
+    <th></th>
+{% endblock %}
+{% block table_body %}
+    {% for shop in paginator.getPage() %}
+        <tr>
+            <td class="align-middle">{{ shop.name }}</td>
+            <td class="align-middle">{{ shop.description }}</td>
+            {% embed 'theme/manageColumn.html.twig' %}
+                {% block editPath %}{{ path('shops.show',{id:shop.id}) }}{% endblock %}
+                {% block deletePath %}{{ path('shops.delete',{id:shop.id}) }}{% endblock %}
+            {% endembed %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3" class="text-center">
+                Brak sklepów
+            </td>
+        </tr>
+    {% endfor %}
+    {% include 'modals/delete.html.twig' %}
+{% endblock %}
+{% block right_col %}
+    {% embed 'shops/form.html.twig' %}
+        {% block header %}Dodaj nowy sklep{% endblock %}
+        {% block action %}{{ path("shops.create") }}{% endblock %}
+        {% block button %}
+            <span class="save-icon"></span>
+            Dodaj
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/shops/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/shops/index.js') }}"></script>
+{% endblock %}

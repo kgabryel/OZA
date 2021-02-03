@@ -1,0 +1,20 @@
+{% block positions_select_widget %}
+    {% for position in form %}
+        <div class="position">
+            <div class="md-form form-lg list-input">
+                <input type="text" id="product{{ loop.index-1 }}" class="form-control form-control-lg
+                                    {{ position.vars.errors|length|checkInput(checked) }}"
+                       name="quick_list_form[products][{{ loop.index-1 }}]"
+                       value="{{ position.vars.data }}"
+                />
+                <label for="product{{ loop.index }}" {% if value != '' %}class="active"{% endif %}>Produkt</label>
+            </div>
+            <button type="button" class="btn btn-primary btn-block square-btn delete-position-button">
+                <span class="trash-icon"></span>
+            </button>
+            {% for error in position.vars.errors %}
+                <small class="form-text text-danger error-message">{{ error.message }}</small>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

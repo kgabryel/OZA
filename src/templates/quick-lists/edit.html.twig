@@ -1,0 +1,15 @@
+<form method="POST" action="{{ path('quick-lists.update',{id:id}) }}">
+    <input type='hidden' name='_method' value='PUT'>
+    <div class="modal-body add-form scrollbar-primary">
+        {{ form_widget(form.name,{checked: false}) }}
+        {{ form_widget(form.products,{checked: false}) }}
+        <button type="button" class="btn btn-primary btn-block add-button">
+            Dodaj kolejny
+        </button>
+        <input type="hidden" name="{{ form._token.vars.name }}"
+               value="{{ form._token.vars.value }}"/>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-block">Aktualizuj</button>
+    </div>
+</form>

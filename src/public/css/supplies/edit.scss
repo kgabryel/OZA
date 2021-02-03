@@ -1,0 +1,15 @@
+@import "../components/button-rounded";
+@import "../components/btn-icon/trash-icon";
+@import "../components/card";
+@import "../components/content-table";
+@import "../components/material-select";
+@import "../components/btn-icon/left-arrow-icon";
+@import "../components/btn-icon/uncheck-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/btn-icon/plus-icon";
+table > tbody > tr > td:last-of-type {
+  width: 60px !important;
+}
+#alertsModal .alert{
+  cursor: pointer;
+}

@@ -1,0 +1,46 @@
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Nowa lista zakupów
+                    {% if alerts|length>0 %}
+                        <button type="button" class="btn btn-warning waves-effect waves-light"
+                                data-toggle="modal"
+                                data-target="#alertsModal">
+                            Aktywne powiadomienia
+                        </button>
+                    {% endif %}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{ path('lists.create') }}">
+                <div class="modal-body add-form scrollbar-primary">
+                    {{ form_widget(form.name,{checked: createChecked}) }}
+                    <div class="positions">
+                        {% for position in form.positions %}
+                            <div class="position">
+                                {{ form_widget(position,{checked: createChecked}) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block add-button" data-toggle="modal"
+                            data-target="#productModal">
+                        <span class="plus-icon"></span>
+                        Dodaj Produkt
+                    </button>
+                </div>
+                <input type="hidden" name="{{ form._token.vars.full_name }}"
+                       value="{{ form._token.vars.value }}"/>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span class="save-icon"></span>
+                        Utwórz
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

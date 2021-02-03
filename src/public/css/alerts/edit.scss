@@ -1,0 +1,67 @@
+@import "../components/button-rounded";
+@import "../components/btn-icon/plus-icon";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/content-table";
+@import "../components/card";
+@import "../components/modal-span";
+@import "../components/material-switch";
+@import "../components/material-textarea";
+@import "../components/material-select";
+@import "../components/btn-icon/eye-icon";
+@import "../components/btn-icon/left-arrow-icon";
+@import "../components/btn-icon/uncheck-icon";
+.type-select, .active-switch {
+  display: inline-block;
+}
+
+.type-select {
+  width: calc(100% - 210px);
+}
+
+.active-switch {
+  position: absolute;
+  top: 35px;
+  width: 200px;
+  padding-left: 10px;
+}
+
+@media only screen and (max-width: 540px) {
+  .type-select, .active-switch {
+    display: block;
+    width: 100%;
+  }
+  .active-switch {
+    position: relative;
+    top: 10px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1300px) {
+  .type-select, .active-switch {
+    display: block;
+    width: 100%;
+  }
+  .active-switch {
+    position: relative;
+    top: 10px;
+  }
+}
+
+.preview-card table td:last-of-type {
+  padding-top: 20px !important;
+  width: 100px
+}
+
+.preview-card table td > div {
+  margin-bottom: 0;
+}
+.alerts-card table td:last-of-type {
+  padding-bottom: 0;
+  padding-top: 0;
+  width: 50px !important;
+}
+
+.preview-card .content-table {
+  padding-top: 10px;
+}

@@ -1,0 +1,35 @@
+{% extends "measures/card-form.html.twig" %}
+{% block header %}
+    Dodaj główną miarę
+{% endblock %}
+{% block form %}
+    <form method="POST" action="{{ path('measures.main.create') }}">
+        <div class="row">
+            <div class="col-md-12 col-xl-6">
+                {{ form_widget(form.name, {checked: checked}) }}
+            </div>
+            <div class="col-md-12 col-xl-6">
+                {{ form_widget(form.shortcut, {checked: checked}) }}
+            </div>
+        </div>
+        <input type="hidden" name="{{ form._token.vars.full_name }}"
+               value="{{ form._token.vars.value }}"/>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-info btn-block my-4" type="submit">
+                    <span class="save-icon"></span> Dodaj
+                </button>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-info btn-block my-4" type="button"
+                   href="{{ path('measures.index') }}">
+                    <span class="left-arrow-icon"></span> Powrót
+                </a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/measures/main-measure.css') }}"/>
+{% endblock %}

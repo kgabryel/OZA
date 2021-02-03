@@ -1,0 +1,123 @@
+{% extends "theme/table-view.html.twig" %}
+{% block table_name %}Zakupy{% endblock %}
+ {% block table_nav %}
+     <form method="GET" action="{{ path('shopping.index') }}">
+         <div class="row">
+             <div class="col-10 offset-1 col-sm-3 offset-sm-1">
+                 {{ form_widget(findForm.dateFrom, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-sm-0 col-sm-3">
+                 {{ form_widget(findForm.dateTo, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-sm-0 col-sm-4 multi-select-col">
+                 {{ form_widget(findForm.promotion, {checked: false}) }}
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-10 offset-1 col-sm-5 offset-sm-1 multi-select-col">
+                 {{ form_widget(findForm.shops, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-sm-0 col-sm-5 multi-select-col">
+                 {{ form_widget(findForm.measures, {checked: false}) }}
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-10 offset-1 col-sm-5 offset-sm-1 multi-select-col">
+                 {{ form_widget(findForm.products, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-sm-0 col-sm-5 multi-select-col">
+                 {{ form_widget(findForm.stuffs, {checked: false}) }}
+             </div>
+         </div>
+         <div class="row justify-content-center ">
+             <div class="col-10 col-sm-5 col-lg-3">
+                 <button class="btn btn-info btn-block my-4 waves-effect waves-light" type="submit">
+                     <span class="search-icon"></span>
+                     Szukaj
+                 </button>
+             </div>
+             <div class="col-lg-4 d-none d-lg-block">
+                 {{ paginate(paginator) }}
+             </div>
+             <div class="col-10 col-sm-5 col-lg-3">
+                 <button class="btn btn-default btn-block my-4 waves-effect waves-light clear-button" type="button">
+                     <span class="clear-icon"></span>
+                     Czyść
+                 </button>
+             </div>
+             <div class="col-10 d-lg-none">
+                 {{ paginate(paginator) }}
+             </div>
+         </div>
+     </form>
+ {% endblock %}
+{% block table_header %}
+    <th>Data</th>
+    <th>Produkt</th>
+    <th>Sklep</th>
+    <th>Kwota</th>
+    <th>Jednostka</th>
+    <th>Promocja</th>
+    <th></th>
+{% endblock %}
+{% block table_body %}
+    {% for position in paginator.getPage() %}
+        <tr data-id="{{ position.id }}" data-measure-id="{{ position.measure.id }}">
+            <td>{{ position.date()|date('Y-m-d') }}</td>
+            <td>
+                <span data-toggle="modal" data-target="#productModal" class="modal-product" data-id="{{ position.getPosition().id }}" data-type="{% if position.isProduct()%}product{% else %}stuff{% endif %}">
+                    {{ position.getPosition().name }}
+                </span>
+            </td>
+            <td><a href="{{ path('shops.show',{id:position.shop.id}) }}">{{ position.shop.name }}</a></td>
+            <td>
+                <span data-toggle="modal" data-target="#priceModal" class="modal-price"
+                      data-price="{{ position.price }}">
+                   {{ position.price|round(2) }} zł / {{ position.measure.shortcut }}
+                </span>
+            </td>
+            <td>
+                <span data-toggle="modal" data-target="#measureModal" class="modal-measure">
+                        {{ position.measure.name }}
+                </span>
+            </td>
+            <td>{% if position.hasPromotion() %}Tak{% else %}Nie{% endif %}</td>
+            <td class="align-middle">
+                <form action="{{ path("shopping.delete",{id:position.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit"
+                            class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                            data-toggle="modal"
+                            data-target="#deleteModal">
+                        <span class="trash-icon"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7" class="text-center">
+                Brak zakupów
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block right_col %}
+    {% include 'shopping/form.html.twig' %}
+{% endblock %}
+{% block modals %}
+    {% include 'modals/shopping/product.html.twig' %}
+    {% include 'modals/delete.html.twig' %}
+    {% include 'modals/measure.html.twig' %}
+    {% include 'modals/product.html.twig' %}
+    {% include 'modals/shopping/price.html.twig' %}
+    {% include 'modals/product.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/shopping/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/shopping/index.js') }}"></script>
+{% endblock %}

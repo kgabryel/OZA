@@ -1,0 +1,121 @@
+{% extends "content.html.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                        <div></div>
+                        <div class="white-text mx-3 tab-header">Podgląd</div>
+                        <div></div>
+                    </div>
+                    <div class="card card-cascade narrower card-cont preview-card">
+                        <div class="px-4">
+                            <div class="table-wrapper content-table">
+                                <table class="table table-hover mb-0">
+                                    <thead></thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="alert alert-{{ entity.type.type }}" role="alert">
+                                                {{ entity.description }}
+                                            </div>
+                                        </td>
+                                        <td>{{ select(entity.isActive, 'Aktywne','Nieaktywne') }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                        <div></div>
+                        <div class="white-text mx-3 tab-header">Przypisane zapasy</div>
+                        <div></div>
+                    </div>
+                    <div class="card card-cascade narrower card-cont alerts-card">
+                        <div class="px-4">
+                            <div class="table-wrapper content-table">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>Od</th>
+                                        <th>Do</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for supply in entity.supplyAlerts %}
+                                        <tr>
+                                            <td>
+                                                <span data-toggle="modal" data-target="#productModal"
+                                                      class="modal-product"
+                                                      data-id="{{ supply.supply.product.id }}">
+                                                    {{ supply.supply.product.name }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {{ previousAlert(supply) }}
+                                            </td>
+                                            <td>{{ supply.amount }} {{ supply.supply.product.measure.shortcut }}</td>
+                                            <td class="align-middle">
+                                                <a href="{{ path("supply.show",{id:supply.supply.id}) }}">
+                                                    <button type="button"
+                                                            class="btn btn-outline-white button-rounded btn-sm px-2 edit-button">
+                                                        <span class="eye-icon"></span>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="4" class="text-center">Powiadomienie nie jest do niczego
+                                                przypisane
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% embed 'alerts/form.html.twig' %}
+                {% block header %}Edycja{% endblock %}
+                {% block action %}{{ path("alerts.update",{id:entity.id}) }}{% endblock %}
+                {% block method %}<input type="hidden" name="_method" value="put"/>{% endblock %}
+                {% block button %}
+                    <span class="edit-icon"></span>
+                    Aktualizuj
+                {% endblock %}
+                {% block additional %}
+                    {% embed 'theme/additional-edit.html.twig' %}
+                        {% block deletePath %}{{ path('alerts.delete',{id:entity.id}) }}{% endblock %}
+                        {% block backPath %}{{ path('alerts.index') }}{% endblock %}
+                    {% endembed %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+    {% include 'modals/product.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/icon.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/material.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/getmdl-select.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/alerts/edit.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/material.min.js') }}"></script>
+    <script src="{{ asset('js/getmdl-select.min.js') }}"></script>
+{% endblock %}

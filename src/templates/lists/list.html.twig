@@ -1,0 +1,104 @@
+<span data-list-id="{{ list.id }}">
+    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+        <div>
+        <button type="button"
+                class="btn btn-outline-white edit-button button-rounded btn-sm px-2"
+                data-toggle="modal"
+                data-target="#editModal">
+            <span class="edit-icon"></span>
+        </button>
+        {% if list.getAlerts()|length > 0 %}
+            <button type="button"
+                    class="btn btn-outline-white button-rounded btn-sm px-2 list-alert-button" data-toggle="modal"
+                    data-target="#listAlertModal">
+                <span class="alert-icon"></span>
+            </button>
+        {% endif %}
+    </div>
+        <div class="white-text mx-3 tab-header">{{ list.name }}</div>
+        <div>
+                {% if list.positions|length > 0 %}
+                    <a href="{{ path('shopping.list', {id:list.id}) }}">
+                        <button type="button"
+                                class="btn btn-outline-white button-rounded btn-sm px-2">
+                            <span class="shopping-icon"></span>
+                        </button>
+                    </a>
+                {% endif %}
+        <button type="button"
+                class="btn btn-outline-white button-rounded btn-sm px-2 delete-button" data-toggle="modal"
+                data-target="#deleteModal">
+            <span class="trash-icon"></span>
+        </button>
+    </div>
+    </div>
+    <div class="card card-cascade narrower card-cont">
+    <div class="card-body card-body-cascade">
+        <div class="card-text list-content scrollbar-primary">
+            <p class="text-center">{{ list.createdAt()|date('Y-m-d H:i') }}</p>
+            <div class="progress">
+                {% if list.positions|length == 0 %}
+                    <span>Brak produktów na liście</span>
+                {% else %}
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                         style="width:{{ list.getChecked()|length/list.positions|length*100 }}%">
+                        {{ list|printProgress }}
+                    </div>
+                    {{ list|printProgress(true) }}
+                {% endif %}
+            </div>
+            {% for position in list.positions %}
+                <div class="element" data-position-id="{{ position.id }}">
+                    <div class="left-buttons buttons">
+                         {% if position.checked %}
+                             <button type="button"
+                                     class="btn btn-outline-white button-rounded btn-sm px-2 change-state-button waves-effect waves-light"
+                             >
+                                <span class="uncheck-icon"></span>
+                            </button>
+                        {% else %}
+                             <button type="button"
+                                     class="btn btn-outline-white button-rounded btn-sm px-2 change-state-button waves-effect waves-light"
+                             >
+                                <span class="check-icon"></span>
+                            </button>
+                         {% endif %}
+                        <button type="button"
+                                class="btn btn-outline-white button-rounded btn-sm px-2 info-button waves-effect waves-light"
+                                data-toggle="modal" data-target="#infoModal">
+                            <span class="{{ position|typeIcon }}"></span>
+                        </button>
+                    </div>
+                    <div class="position-content">
+                        <p>{{ position.getContent().name }}</p>
+                        <p class="float-right">
+                            {{ position.measureValue }} {{ position.measure.shortcut }}
+                        </p>
+                    </div>
+                    <div class="right-buttons buttons">
+                        {% if position.alerts|length>0 %}
+                            <button type="button"
+                                    class="btn btn-outline-white button-rounded btn-sm px-2 alert-button waves-effect waves-light"
+                                    data-toggle="modal" data-target="#listPositionAlertModal">
+                                <span class="alert-icon"></span>
+                            </button>
+                        {% endif %}
+                    <button type="button"
+                            class="btn btn-outline-white button-rounded btn-sm px-2 delete-position-button waves-effect waves-light"
+                            data-toggle="modal" data-target="#deletePositionModal">
+                            <span class="trash-icon"></span>
+                    </button>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr/>
+        </div>
+        <hr/>
+        <button class="btn btn-sm my-0 btn-block show-button" type="button" data-toggle="modal"
+                data-target="#fullModal">
+            <span class="search-icon"></span>
+            Pokaż
+        </button>
+    </div>
+</div>
+</span>

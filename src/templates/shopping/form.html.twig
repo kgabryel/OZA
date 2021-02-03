@@ -1,0 +1,30 @@
+{% extends "theme/column-form.html.twig" %}
+{% block header %}Dodaj zakupy{% endblock %}
+{% block form %}
+    <form method="POST" action="{{ path('shopping.create') }}">
+        <div class="row">
+            <div class="col-sm-6 shop">
+                {{ form_widget(createForm.baseShop, {checked: checked}) }}
+            </div>
+            <div class="col-sm-6 date">
+                {{ form_widget(createForm.date, {checked: checked}) }}
+            </div>
+        </div>
+        {% for position in createForm.positions %}
+            <div class="position">
+                {{ form_widget(position,{checked: checked}) }}
+            </div>
+        {% endfor %}
+        <button class="btn btn-success btn-block my-4 add-button" type="button" data-toggle="modal"
+                data-target="#productAddModal">
+            <span class="plus-icon"></span>
+            Dodaj
+        </button>
+        <input type="hidden" name="{{ createForm._token.vars.full_name }}"
+               value="{{ createForm._token.vars.value }}"/>
+        <button class="btn btn-info btn-block my-4" type="submit">
+            <span class="save-icon"></span>
+            Zapisz
+        </button>
+    </form>
+{% endblock %}

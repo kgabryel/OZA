@@ -1,0 +1,22 @@
+.new-card {
+  height: 446.350px;
+  margin-top: 35px;
+  margin-bottom: 45px;
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.new-card > div > button {
+  width: 100px;
+  height: 100px;
+  margin-top: 161.175px;
+  font-size: 50px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  border: 10px rgba(255, 255, 255, 0.5) !important;
+  border-radius: 50%;
+}
+
+.new-card:hover > div > button {
+  color: rgba(0, 0, 0, 0.5) !important;
+  border-color: rgba(0, 0, 0, 0.5) !important;
+}

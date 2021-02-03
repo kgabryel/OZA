@@ -1,0 +1,18 @@
+.login-button{
+    margin:10px !important;
+}
+.login-button > i {
+    padding-top: 5px;
+    height: 100%;
+}
+.btn-facebook {
+    margin-left: 0 !important;
+}
+form {
+    padding: 30px 48px 10px 48px;
+}
+@media only screen and (max-width: 360px) {
+    form {
+        padding: 10px;
+    }
+}

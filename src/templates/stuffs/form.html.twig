@@ -1,0 +1,31 @@
+{% extends "theme/column-form.html.twig" %}
+{% block header %}Dodaj produkt{% endblock %}
+{% block form %}
+    <form method="POST" action="{{ path('stuffs.create') }}">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ form_widget(createForm.name, {checked: checked}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 product material-select-col">
+                {{ form_widget(createForm.product, {checked: checked}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 measure material-select-col">
+                {{ form_widget(createForm.measure, {checked: checked}) }}
+            </div>
+        </div>
+        <input type="hidden" name="{{ createForm._token.vars.full_name }}"
+               value="{{ createForm._token.vars.value }}"/>
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-info btn-block my-4" type="submit">
+                    <span class="save-icon"></span>
+                    Dodaj
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

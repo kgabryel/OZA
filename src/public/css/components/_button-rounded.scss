@@ -1,0 +1,9 @@
+$background: #303f9f;
+.button-rounded {
+  border-radius: 50%;
+  background-color: $background !important;
+}
+
+.button-rounded:hover, .button-rounded:focus, .button-rounded:active {
+  background-color: lighten($background, 20%) !important;
+}

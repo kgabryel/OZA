@@ -1,0 +1,50 @@
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nowa pozycja</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body scrollbar-primary">
+                <div class="md-form form-lg">
+                    <input type="text" id="search-product" class="form-control form-control-lg"
+                           name="search-product" autocomplete="off"
+                    />
+                    <label for="search-product" id="search-product-label">Produkt</label>
+                </div>
+                <ul class="list-products scrollbar-primary">
+                </ul>
+                <div class="details">
+                    <div class="amount">
+                        <div class="md-form form-lg">
+                            <input type="text" id="amount-product" class="form-control form-control-lg"
+                                   name="amount-product" value="1"
+                            />
+                            <label for="amount-product">Ilość</label>
+                        </div>
+                    </div>
+                    <div class="measure">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height material-select" id="measure-product_main">
+                            <input type="text" value="" class="mdl-textfield__input"
+                                   id="measure-product" readonly
+                            />
+                            <input type="hidden" name="measure-product"/>
+                            <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                            <label for="measure-product" class="mdl-textfield__label">
+                                Jednostka
+                            </label>
+                            <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu scrollbar-primary" for="measure-product">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-block add-button btn-add-product" disabled>
+                    <span class="plus-icon"></span>
+                    Dodaj
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% block material_switch_widget %}
+    <div class="material-switch">
+        <div>
+            {{ off }}
+        </div>
+        <div class="switch">
+            <input type="checkbox" id="{{ full_name }}"
+                   name="{{ full_name }}" class="switch__input" {% if checked %}checked{% endif %}>
+            <label for="{{ full_name }}" class="switch__label"></label>
+        </div>
+        <div>
+            {{ on }}
+        </div>
+    </div>
+{% endblock %}

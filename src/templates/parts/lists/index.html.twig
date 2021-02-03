@@ -1,0 +1,25 @@
+{% extends "content.html.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card card-cascade narrower new-card" data-toggle="modal" data-target="#createModal">
+                <div class="text-center">
+                    <button type="button"
+                            class="btn btn-outline-white btn-sm px-2">
+                        <span class="plus-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% for list in lists %}
+            <div class="col-md-6 col-lg-4 col-xl-3 list">
+                {% include listTemplate %}
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'modals/edit.html.twig' %}
+    {% include 'modals/delete.html.twig' %}
+    {% include 'modals/full.html.twig' %}
+    {% include 'modals/lists/delete-position.html.twig' %}
+    {% block modals %}{% endblock %}
+{% endblock %}

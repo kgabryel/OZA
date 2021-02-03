@@ -1,0 +1,20 @@
+<form method="POST" action="{{ path('lists.update',{id:id}) }}">
+    <input type='hidden' name='_method' value='PUT'>
+    <div class="modal-body add-form scrollbar-primary">
+        {{ form_widget(form.name,{checked: false}) }}
+        <div class="positions" data-count="{{ form.positions|length }}">
+            {% for position in form.positions %}
+                <div class="position">
+                    {{ form_widget(position,{checked: false}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn btn-primary btn-block add-button" data-toggle="modal"
+                data-target="#productModal">
+            Dodaj Produkt
+        </button>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-block">Aktualizuj</button>
+    </div>
+</form>

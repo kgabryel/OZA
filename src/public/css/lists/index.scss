@@ -1,0 +1,180 @@
+@import "../components/material-switch";
+@import "../components/material-select";
+@import "../parts/lists-products";
+@import "../parts/lists";
+
+.list-products > li {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.list-products > li > span {
+  text-align: right;
+}
+
+.amount, .measure {
+  display: inline-block;
+}
+
+.amount {
+  width: 60px;
+}
+
+.measure {
+  width: calc(100% - 64px);
+  position: relative;
+}
+
+.list-products > li:hover {
+  background-color: #EEEEEE;
+}
+
+.list .element.checked-element > p {
+  text-decoration: line-through;
+}
+
+.list .element > p {
+  padding: 5px;
+}
+
+.list .element > .content-panel > p {
+  margin-bottom: 5px;
+}
+
+.list-content > hr, #fullModal span > hr {
+  margin: 5px;
+}
+
+.list-content > hr:last-of-type, #fullModal span > hr:last-of-type {
+  display: none;
+}
+
+
+#fullModal .modal-content {
+  min-height: 520px;
+}
+
+
+.position-content {
+  width: calc(100% - 85px);
+  display: inline-block;
+  margin-bottom: 0;
+  float: left;
+}
+
+.element > p:last-child {
+  margin-bottom: 5px;
+}
+
+.position .show {
+  width: calc(100% - 40px);
+  margin-top: 5px;
+}
+
+.position .buttons {
+  width: 30px;
+  float: right;
+}
+
+.position .show, .position .buttons {
+  display: inline-block;
+}
+
+.switch {
+  height: 30px;
+}
+
+.buttons {
+  width: 40px;
+}
+
+.list .button-rounded, .buttons .btn {
+  width: 30px;
+  height: 30px;
+}
+
+.buttons > button {
+  display: block;
+}
+
+.left-buttons {
+  float: left;
+}
+
+#measure-product {
+  padding-bottom: 7.6px;
+}
+
+#editModal .show, #createModal .show {
+  margin-top: 35px;
+  padding-top: 15px;
+  float: left;
+}
+
+#editModal .buttons > button, #createModal .buttons > button {
+  padding: 0;
+}
+
+#editModal .buttons > button > span, #createModal .buttons > button > span {
+  margin-top: 8px;
+  margin-left: 5px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+}
+
+.modal-body {
+  padding-right: 14px;
+}
+
+#positionAlertModal button > span {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 11px 11px 9px;
+}
+
+#positionAlertModal button {
+  padding: 0;
+}
+
+#positionAlertModal th:nth-child(2) {
+  width: 40px;
+}
+
+#positionAlertModal tbody td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#positionAlertModal tbody td > .alert {
+  margin-bottom: 0;
+}
+
+.modal {
+  padding-left: 0;
+}
+
+.list .alert-icon {
+  padding-left: 1px;
+  display: block;
+  font-size: 12px;
+}
+
+.list .products-icon {
+  padding-left: 0;
+  display: block;
+  font-size: 13px;
+}
+
+.list .stuff-icon {
+  padding-left: 1px;
+  padding-bottom: 1px;
+  display: block;
+  font-size: 13px;
+}
+
+.element {
+  clear: both;
+}

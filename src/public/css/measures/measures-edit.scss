@@ -1,0 +1,27 @@
+@import "../components/button-rounded";
+@import "../components/btn-icon/plus-icon";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/content-table";
+@import "../components/card";
+@import "../components/table-navigation";
+@import "../components/modal-span";
+@import "../components/btn-icon/left-arrow-icon";
+@import "../components/btn-icon/uncheck-icon";
+@import "../components/btn-icon/eye-icon";
+@import "../components/collapse";
+
+h3 {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.container {
+  max-width: 970px;
+}

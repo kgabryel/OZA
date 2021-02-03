@@ -1,0 +1,21 @@
+{% block number_widget %}
+    <div class="md-form form-lg">
+        <input type="number" step="any" id="{{ full_name }}" class="form-control form-control-lg
+        {{ errors|length|checkInput(checked) }}"
+               name="{{ full_name }}"
+               value="{{ value }}"
+               style="background-position-x: calc(100% - 15px) !important;"
+        />
+        <label for="{{ full_name }}">{{ label }}</label>
+        {% if help is defined %}
+            <small class="form-text text-muted">
+                {{ help }}
+            </small>
+        {% endif %}
+        {% for error in errors %}
+            <small class="form-text text-danger">
+                {{ error.message }}
+            </small>
+        {% endfor %}
+    </div>
+{% endblock %}

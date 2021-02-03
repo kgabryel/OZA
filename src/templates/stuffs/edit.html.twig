@@ -1,0 +1,79 @@
+{% extends "theme/list-edit.html.twig" %}
+{% set deletePath = path('stuffs.delete',{id:entity.id}) %}
+{% set backPath = path('stuffs.index') %}
+{% block summary %}
+    <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="accordion">
+            <div class="card">
+                <div class="card-header blue-gradient text-center">
+                    <p data-toggle="collapse"
+                       aria-expanded="true">
+                        Nazwa
+                    </p>
+                </div>
+                <div class="collapse show">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-center">
+                                {{ entity.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="card">
+                <div class="card-header blue-gradient text-center">
+                    <p data-toggle="collapse"
+                       aria-expanded="true">
+                        Jednostka
+                    </p>
+                </div>
+                <div class="collapse show">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-center">
+                                {{ entity.measure.name }}
+                                <a
+                                        class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                        href="{{ path('measures.show',{id:entity.measure.id}) }}">
+                                    <span class="eye-icon"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="card">
+                <div class="card-header blue-gradient text-center">
+                    <p data-toggle="collapse"
+                       aria-expanded="true">
+                        Produkt
+                    </p>
+                </div>
+                <div class="collapse show">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-center">
+                                {{ entity.product.name }}
+                                <a
+                                        class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                        href="{{ path('products.show',{id:entity.product.id}) }}">
+                                    <span class="eye-icon"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block action %}{{ path('stuffs.update',{id:entity.id}) }}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/stuffs/edit.css') }}"/>
+{% endblock %}

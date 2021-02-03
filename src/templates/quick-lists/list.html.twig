@@ -1,0 +1,66 @@
+<span data-list-id="{{ list.id }}">
+    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+        <div>
+            <button type="button"
+                    class="btn btn-outline-white edit-button button-rounded btn-sm px-2">
+                <i class="fas fa-pen mt-0"></i>
+            </button>
+        </div>
+        <div class="white-text mx-3 tab-header">{{ list.name }}</div>
+        <div>
+            <button type="button"
+                    class="btn btn-outline-white button-rounded btn-sm px-2 delete-button" data-toggle="modal"
+                    data-target="#deleteModal">
+                <i class="fas fa-trash-alt mt-0"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card card-cascade narrower card-cont">
+        <div class="card-body card-body-cascade">
+            <div class="card-text list-content scrollbar-primary">
+                <p class="text-center">{{ list.createdAt()|date('Y-m-d H:i') }}</p>
+                                <div class="progress">
+                                    {% if list.positions|length == 0 %}
+                                        <span>Brak produktów na liście</span>
+                                    {% else %}
+                                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                                             role="progressbar"
+                                             style="width:{{ list.getChecked()|length/list.positions|length*100 }}%">
+                                            {{ list|printProgress }}
+                                        </div>
+                                        {{ list|printProgress(true) }}
+                                    {% endif %}
+                                </div>
+                                    {% for position in list.positions %}
+                                        <div class="element {{ position.checked|checkPosition }}"
+                                             data-position-id="{{ position.id }}">
+                                            <div class="check-panel align-middle">
+                                                <button type="button"
+                                                        class="btn {{ position.checked|checkButton }} btn-block square-btn change-state-button">
+                                                    <span class="{{ position.checked|checkIcon }}"></span>
+                                                </button>
+                                            </div>
+                                            <div class="content-panel">
+                                                <p>{{ position.content }}</p>
+                                            </div>
+                                            <div class="delete-panel align-middle">
+                                                <button type="button"
+                                                        class="btn btn-danger btn-block square-btn delete-position-button"
+                                                        data-toggle="modal"
+                                                        data-target="#deletePositionModal">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                    {% endfor %}
+            </div>
+            <hr/>
+            <button class="btn btn-sm my-0 btn-block show-button" type="button" data-toggle="modal"
+                    data-target="#fullModal">
+                <span class="search-icon"></span>
+                Pokaż
+            </button>
+        </div>
+    </div>
+</span>

@@ -1,0 +1,13 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes:
+        - 'fields/material-select.html.twig'
+        - 'fields/material-text.html.twig'
+        - 'fields/material-number.html.twig'
+        - 'fields/material-textarea.html.twig'
+        - 'fields/material-switch.html.twig'
+        - 'fields/material-date.html.twig'
+        - 'fields/list-position.html.twig'
+        - 'fields/positions-select.html.twig'
+        - 'fields/shopping-position.html.twig'
+        - 'fields/multi-select.html.twig'

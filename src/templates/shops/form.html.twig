@@ -1,0 +1,26 @@
+<div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+    <div></div>
+    <div class="white-text mx-3 tab-header">{% block header %}{% endblock %}</div>
+    <div></div>
+</div>
+<div class="card card-cascade narrower card-cont">
+    <div class="px-4">
+        <form method="POST" action="{% block action %}{% endblock %}">
+            {% block method %}{% endblock %}
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_widget(createForm.name, {checked: checked}) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_widget(createForm.description, {checked: checked}) }}
+                </div>
+            </div>
+            <input type="hidden" name="{{ createForm._token.vars.full_name }}"
+                   value="{{ createForm._token.vars.value }}"/>
+            <button class="btn btn-info btn-block my-4" type="submit">{% block button %}{% endblock %}</button>
+        </form>
+        {% block additional %}{% endblock %}
+    </div>
+</div>

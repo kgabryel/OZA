@@ -1,0 +1,105 @@
+{% extends "content.html.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                <div></div>
+                <div class="white-text mx-3 tab-header">Przypisane powiadomienia</div>
+                <div></div>
+            </div>
+            <div class="card card-cascade narrower card-cont alerts-card">
+                <div class="px-4">
+                    <div class="table-wrapper content-table">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                            <tr>
+                                <th>Powiadomienie</th>
+                                <th>Ilość od</th>
+                                <th>Ilość do</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for alert in entity.alerts %}
+                                <tr>
+                                    <td>
+                                        <div class="alert alert-{{ alert.alert.type.type }}" role="alert">
+                                            {{ alert.alert.description }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ previousAlert(alert) }}
+                                    </td>
+                                    <td>
+                                        {{ alert.amount }} {{ entity.product.measure.shortcut }}
+                                    </td>
+                                    <td>
+                                        <form action="{{ path("supply.alerts.delete",{id:alert.id}) }}" method="post">
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button type="submit"
+                                                    class="btn btn-outline-white button-rounded btn-sm px-2">
+                                                <span class="trash-icon"></span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                <div></div>
+                <div class="white-text mx-3 tab-header">Edycja</div>
+                <div></div>
+            </div>
+            <div class="card card-cascade narrower card-cont">
+                <div class="px-4">
+                    <form method="POST" action="{{ path('supply.update',{id:entity.id}) }}">
+                        <input type="hidden" name="_method" value="put"/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="amount">
+                                    {{ form_widget(createForm.amount, {checked: checked}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="{{ createForm._token.vars.full_name }}"
+                               value="{{ createForm._token.vars.value }}"/>
+                        <button class="btn btn-info btn-block my-4" type="submit">
+                            <span class="edit-icon"></span>
+                            Aktualizuj
+                        </button>
+                        <button class="btn btn-success btn-block my-4" type="button" data-toggle="modal"
+                                data-target="#addAlertsModal">
+                            <span class="plus-icon"></span>
+                            Dodaj powiadomienie
+                        </button>
+                    </form>
+                    {% embed 'theme/additional-edit.html.twig' %}
+                        {% block deletePath %}{{ path('supply.delete',{id:entity.id}) }}{% endblock %}
+                        {% block backPath %}{{ path('supply.index') }}{% endblock %}
+                    {% endembed %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'modals/supply/add-alert.html.twig' %}
+    {% include 'modals/supply/alerts.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/icon.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/material.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/getmdl-select.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/supplies/edit.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/material.min.js') }}"></script>
+    <script src="{{ asset('js/getmdl-select.min.js') }}"></script>
+    <script src="{{ asset('js/supplies/edit.js') }}"></script>
+{% endblock %}

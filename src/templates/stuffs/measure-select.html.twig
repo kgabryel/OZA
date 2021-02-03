@@ -1,0 +1,31 @@
+{% block material_select_widget %}
+    {% set value = options.default %}
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height material-select"
+         id="{{ name }}_main">
+        <input type="text" value="" class="mdl-textfield__input {{ errors|length|checkInput(checked) }}"
+               id="{{ full_name }}" readonly {% if options.enable == 0 %} disabled {% endif %}
+        />
+        <input type="hidden" value="{{ value }}" name="{{ full_name }}"/>
+        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+        <label for="{{ full_name }}" class="mdl-textfield__label">
+            {% if label is not empty %}
+                {{ label }}
+            {% endif %}
+        </label>
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu scrollbar-primary" for="{{ full_name }}">
+            {% for key,val in options.items %}
+                <li class="mdl-menu__item"
+                    data-val="{{ key }}"
+                        {% if key == value %}
+                            data-selected="true"
+                        {% endif %}
+                >{{ val }}</li>
+            {% endfor %}
+        </ul>
+        {% for error in errors %}
+            <small class="form-text text-danger">
+                {{ error.message }}
+            </small>
+        {% endfor %}
+    </div>
+{% endblock %}

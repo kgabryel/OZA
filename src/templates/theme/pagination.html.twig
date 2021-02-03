@@ -1,0 +1,94 @@
+{% set prevPage = paginator.getPageNumber() - 1 %}
+{% set bPrevPage = paginator.getPageNumber() - 2 %}
+{% set nextPage = paginator.getPageNumber() + 1 %}
+{% set aNextPage = paginator.getPageNumber() + 2 %}
+{% set lastPage = paginator.getMaxPage() %}
+{% set page = paginator.getPageNumber() %}
+
+{% if lastPage > 1 %}
+    <div class="text-center paginator">
+        <nav>
+            <ul class="pagination pg-blue">
+                {% if lastPage > 1 %}
+                    {% if lastPage < 5 %}
+                        {% set end = lastPage %}
+                        {% for i in 1..end %}
+                            {% if i == page %}
+                                <li class="page-item waves-effect active">
+                                    <a class="page-link">
+                                        {{ i }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item waves-effect">
+                                    <a class="page-link" href="{{ paginator.getUrl(i) }}">
+                                        {{ i }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% if prevPage > 0 %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(1) }}">
+                                    <<
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(prevPage) }}">
+                                    <
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if bPrevPage > 0 %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(bPrevPage) }}">
+                                    {{ bPrevPage }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if prevPage > 0 %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(prevPage) }}">
+                                    {{ prevPage }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item waves-effect active">
+                            <a class="page-link" href="#">
+                                {{ page }}
+                            </a>
+                        </li>
+                        {% if nextPage <= lastPage %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(nextPage) }}">
+                                    {{ nextPage }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if aNextPage <= lastPage %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(aNextPage) }}">
+                                    {{ aNextPage }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if nextPage <= lastPage %}
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(nextPage) }}">
+                                    >
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect" href="{{ paginator.getUrl(lastPage) }}">
+                                    >>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <link rel="stylesheet" href="{{ asset('css/parts/paginator.css') }}"/>
+{% endif %}

@@ -1,0 +1,102 @@
+<nav class="menu">
+    <h5>{{ app.user.name }}</h5>
+    <a href="{{ path('measures.index') }}">
+        <div class="menu-element measures">
+            <div>
+                <span class="measure-icon"></span>
+            </div>
+            <div>
+                <span>Jednostki miar</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.measures }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('shops.index') }}">
+        <div class="menu-element shops">
+            <div>
+                <span class="shop-icon"></span>
+            </div>
+            <div>
+                <span>Sklepy</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.shops }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('shopping.index') }}">
+        <div class="menu-element shopping">
+            <div>
+                <span class="shopping-icon"></span>
+            </div>
+            <div>
+                <span>Zakupy</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.shopping }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('products.index') }}">
+        <div class="menu-element products">
+            <div>
+                <span class="products-icon"></span>
+            </div>
+            <div style="font-size: 20px">
+                <span>Produkty</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.products }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('stuffs.index') }}">
+        <div class="menu-element stuffs">
+            <div>
+                <span class="stuff-icon"></span>
+            </div>
+            <div>
+                <span>Towary</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.stuffs }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('lists.index') }}">
+        <div class="menu-element lists">
+            <div>
+                <span class="products-list-icon"></span>
+            </div>
+            <div>
+                <span>Listy zakupów</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.lists }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('quick-lists.index') }}">
+        <div class="menu-element quick-lists">
+            <div>
+                <span class="quick-list-icon"></span>
+            </div>
+            <div>
+                <span>Szybkie listy</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.quick_lists }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('alerts.index') }}">
+        <div class="menu-element alerts">
+            <div>
+                <span class="alert-icon"></span>
+            </div>
+            <div>
+                <span>Powiadomienia</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.alerts }}</span>
+            </div>
+        </div>
+    </a>
+    <a href="{{ path('supply.index') }}">
+        <div class="menu-element supply">
+            <div>
+                <span class="supply-icon"></span>
+            </div>
+            <div>
+                <span>Zapasy</span>
+                <span class="badge badge-pill badge-danger float-right">{{ counts.supplies }}</span>
+            </div>
+        </div>
+    </a>
+</nav>

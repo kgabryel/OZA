@@ -1,0 +1,190 @@
+{% extends "content.html.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-xl-4">
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                <div></div>
+                <div class="white-text mx-3 tab-header">Jednostki</div>
+                <div></div>
+            </div>
+            <div class="card card-cascade narrower card-cont">
+                <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="accordion">
+                        <div class="card">
+                            <div class="card-header blue-gradient text-center">
+                                <p data-toggle="collapse"
+                                   aria-expanded="true">
+                                    Typ jednostki
+                                </p>
+                            </div>
+                            <div class="collapse show">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item text-center">
+                                            {% if entity.main is null %}
+                                                Jednostka główna
+                                            {% else %}
+                                                Jednostka podrzędna
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if entity.main is not null %}
+                        <div class="accordion">
+                            <div class="card">
+                                <div class="card-header blue-gradient text-center">
+                                    <p data-toggle="collapse"
+                                       aria-expanded="true">
+                                        Jednostka nadrzędna
+                                    </p>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item text-center">
+                                                {{ entity.main.name }}
+                                                <a
+                                                        class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                                        href="{{ path('measures.show',{id:entity.main.id}) }}">
+                                                    <span class="eye-icon"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else%}
+                        <div class="accordion">
+                            <div class="card">
+                                <div class="card-header blue-gradient text-center pointer">
+                                    <p data-toggle="collapse" data-target="#collapse-sub-measures"
+                                       aria-expanded="true"
+                                       aria-controls="collapse-sub-measures">
+                                      Jednostki podrzędne
+                                    </p>
+                                </div>
+
+                                <div id="collapse-sub-measures" class="collapse show"
+                                     aria-labelledby="heading-sub-measures">
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            {% for measure in entity.measures %}
+                                                <li class="list-group-item text-center">
+                                                    {{ measure.name }}
+                                                    <a
+                                                            class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                                            href="{{ path('measures.show',{id:measure.id}) }}">
+                                                        <span class="eye-icon"></span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="list-group-item text-center">Brak jednostek podrzędnych</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                <div></div>
+                <div class="white-text mx-3 tab-header">Produkty</div>
+                <div></div>
+            </div>
+            <div class="card card-cascade narrower card-cont product-card pointer">
+                <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+                    {% for product in entity.products %}
+                        <div class="accordion">
+                            <div class="card">
+                                <div class="card-header blue-gradient text-center">
+                                    <p data-toggle="collapse" data-target="#collapse{{ loop.index0 }}"
+                                       aria-expanded="true"
+                                       aria-controls="collapse{{ loop.index0 }}">
+                                        {{ product.name }}
+                                        <a
+                                                class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                                href="{{ path('products.show',{id:product.id}) }}">
+                                            <span class="eye-icon"></span>
+                                        </a>
+                                    </p>
+                                </div>
+
+                                <div id="collapse{{ loop.index0 }}" class="collapse"
+                                     aria-labelledby="heading{{ loop.index0 }}">
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            {% for stuff in product.stuffs %}
+                                                <li class="list-group-item text-center">
+                                                    {{ stuff.name }}
+                                                    <a
+                                                            class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                                                            href="{{ path('stuffs.show',{id:stuff.id}) }}">
+                                                        <span class="eye-icon"></span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="list-group-item text-center">Brak towarów</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p class="text-center">Brak produktów</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center card-head">
+                <div></div>
+                <div class="white-text mx-3 tab-header">Edycja</div>
+                <div></div>
+            </div>
+            <div class="card card-cascade narrower card-cont">
+                <div class="px-4">
+                    <form method="POST" action="{{ path('measures.update',{id:entity.id}) }}">
+                        <input type="hidden" name="_method" value="put"/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="amount">
+                                    {{ form_widget(createForm.name, {checked: checked}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="amount">
+                                    {{ form_widget(createForm.shortcut, {checked: checked}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="{{ createForm._token.vars.full_name }}"
+                               value="{{ createForm._token.vars.value }}"/>
+                        <button class="btn btn-info btn-block my-4" type="submit">
+                            <span class="edit-icon"></span>
+                            Aktualizuj
+                        </button>
+                    </form>
+                    {% embed 'theme/additional-edit.html.twig' %}
+                        {% block deletePath %}{{ path('measures.delete',{id:entity.id}) }}{% endblock %}
+                        {% block backPath %}{{ path('measures.index') }}{% endblock %}
+                    {% endembed %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/measures/measures-edit.css') }}"/>
+{% endblock %}

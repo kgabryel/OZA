@@ -1,0 +1,58 @@
+label.mdl-textfield__label {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+label.mdl-textfield__label.active {
+  font-size: 2.25rem;
+  color: #4285f4 !important;
+}
+
+label.mdl-textfield__label:after {
+  bottom: 15px;
+}
+
+.material-select {
+  width: 100% !important;
+}
+
+label.mdl-textfield__label {
+  color: #757575 !important;
+}
+
+input.mdl-textfield__input {
+  padding-bottom: 8.6px;
+  padding-top: 6.4px;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-position-x: calc(100% - 25px) !important;
+  background-position-y: center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+input.mdl-textfield__input.is-valid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+}
+
+input.mdl-textfield__input.is-invalid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
+}
+
+.material-select-col{
+  margin-bottom: -15px;
+}
+.select-error{
+  margin-bottom: -10px;
+  position: relative;
+  top:-20px;
+  font-size: 75% !important;
+}
+.is-invalid ~ .mdl-textfield__label:after {
+  background-color: #f44336 !important;
+}
+.mdl-textfield__label:after{
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+  -webkit-transition-timing-function: unset;
+  transition-timing-function: unset;
+}

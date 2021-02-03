@@ -1,0 +1,45 @@
+{% block shopping_position_widget %}
+    <div>
+        {{ form_widget(form.position,{checked:false}) }}
+        {{ form_widget(form.type,{checked:false}) }}
+        <div class="md-form form-lg">
+            <input type="text" id="position_{{ name }}" class="form-control form-control-lg"
+                   name="position_{{ name }}"
+                   value="{{ select(form.vars.valid, shoppingValue(data), 'Pozycja posiada błędy') }}"
+                   disabled/>
+            <label for="position_{{ name }}" class="active">Produkt</label>
+        </div>
+        <button class="btn btn-danger" type="button">
+            <span class="trash-icon"></span>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 shop">
+            {{ form_widget(form.shop,{checked:false}) }}
+        </div>
+        <div class="col-sm-6 date">
+            {{ form_widget(form.date,{checked:false}) }}
+        </div>
+    </div>
+    <div class="details">
+        <div class="promotion switch-container">
+            <label>Promocja</label>
+            {{ form_widget(form.promotion,{checked:false}) }}
+        </div>
+        <div class="amount">
+            {{ form_widget(form.amount,{checked:false}) }}
+        </div>
+        <div class="price">
+            {{ form_widget(form.price,{checked:false}) }}
+        </div>
+        <div class="ratio">
+            zł / {{ measureShortcut(value.measure) }}
+        </div>
+    </div>
+    {{ form_widget(form.measure,{checked:false}) }}
+    {% for error in errors %}
+        <small class="form-text text-danger">
+            {{ error.message }}
+        </small>
+    {% endfor %}
+{% endblock %}

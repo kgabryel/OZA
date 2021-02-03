@@ -1,0 +1,77 @@
+@import "../components/new-card";
+@import "../components/list";
+@import "../components/button-rounded";
+@import "../components/card";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/btn-icon/check-icon";
+@import "../components/btn-icon/uncheck-icon";
+@import "../components/btn-icon/plus-icon";
+@import "../components/btn-icon/search-icon";
+@import "../components/btn-icon/save-icon";
+
+/* cala lista*/
+.list-content, .add-form {
+  min-height: 320px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* cala lista*/
+.show-button {
+  color: white;
+  background-color: #303f9f;
+}
+
+/* cala lista*/
+.show-button:hover, .show-button:active {
+  color: white;
+  background-color: #455c9f;
+}
+
+/* input edycja/dodawanie */
+.add-button {
+  margin-bottom: 10px !important;
+}
+
+.list-input {
+  margin-top: 0;
+  margin-bottom: 12px;
+  display: inline-block;
+  width: calc(100% - 50px);
+}
+
+.tab-header {
+  max-height: 48px;
+  max-width: calc(100% - 120px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* osobne*/
+.square-btn {
+  display: inline-block;
+  width: 46.075px;
+  padding: 13.44px;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+
+.card-head {
+  height: 48px;
+}
+
+.add-form > div:first-child {
+  width: 100%;
+}
+
+.check-panel, .delete-panel {
+  height: 100%;
+}
+
+.list {
+  padding-top: 3px;
+}

@@ -1,0 +1,132 @@
+@import "../components/button-rounded";
+@import "../components/card";
+@import "../components/content-table";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/btn-icon/search-icon";
+@import "../components/btn-icon/clear-icon";
+@import "../components/btn-icon/plus-icon";
+@import "../components/btn-icon/save-icon";
+@import "../components/material-switch";
+@import "../components/btn-icon/eye-icon";
+@import "../components/modal-span";
+@import "../components/multi-select";
+@import "../parts/lists-products";
+@import "../components/measure-modal";
+
+
+#priceModal .modal-title {
+  width: 100%;
+}
+
+.list-products > li {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.list-products > li > span {
+  text-align: right;
+}
+
+#productModal .measure > div {
+  width: 100%;
+}
+
+.promotion {
+  width: 100px;
+}
+
+.ratio {
+  width: 100px;
+  display: inline-block;
+  font-size: 1.25em;
+}
+
+.amount, .price, .promotion {
+  display: inline-block;
+}
+
+.amount, .price {
+  width: calc(50% - 55px);
+}
+
+#productModal div > .shop, #productModal div > .date {
+  display: inline-block;
+  width: calc(50% - 5px);
+}
+
+#date_input::placeholder {
+  color: #1d1d1d;
+}
+
+.position > div:first-child button {
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+}
+
+.position > div:first-child .md-form {
+  display: inline-block;
+  width: calc(100% - 56px);
+}
+
+.promotion {
+  position: relative;
+  top: 4px;
+}
+
+.position > .material-select {
+  width: 100%;
+}
+
+input[type="date"] {
+  width: 100%;
+}
+
+.date_input {
+  width: 100%;
+}
+
+.date-container {
+  top: 5px;
+}
+
+@media only screen and (max-width: 575px) {
+  .date-container {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  .date > div {
+    height: 30px;
+    top: 0 !important;
+  }
+}
+
+form[method="POST"] .date-container {
+  top: 20px;
+}
+
+#productModal .date-container {
+  top: 3px;
+}
+
+table td:last-of-type {
+  width: 50px !important;
+}
+
+table td > a {
+  color: #303f9f !important;
+  font-weight: bold !important;
+}
+
+#productAddModal .date-container {
+  top: 20px;
+}
+
+#measure-product_main {
+  width: 100%;
+}
+
+.shop > div {
+  width: 100%;
+}

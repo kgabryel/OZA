@@ -1,0 +1,17 @@
+<td class="align-middle">
+    <a href="{% block editPath %}{% endblock %}">
+        <button type="button"
+                class="btn btn-outline-white button-rounded btn-sm px-2">
+            <span class="edit-icon"></span>
+        </button>
+    </a>
+    <form action="{% block deletePath %}{% endblock %}" method="post">
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit"
+                class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                data-toggle="modal"
+                data-target="#deleteModal">
+            <span class="trash-icon"></span>
+        </button>
+    </form>
+</td>

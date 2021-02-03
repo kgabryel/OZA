@@ -1,0 +1,13 @@
+{% block textarea_widget %}
+    <div class="md-form form-lg">
+        <textarea id="{{ full_name }}" class="md-textarea form-control {{ errors|length|checkInput(checked) }}"
+                  name="{{ full_name }}"
+                  rows="3">{{ value }}</textarea>
+        <label for="{{ full_name }}">{{ label }}</label>
+        {% for error in errors %}
+            <small class="form-text text-danger">
+                {{ error.message }}
+            </small>
+        {% endfor %}
+    </div>
+{% endblock %}

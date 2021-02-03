@@ -1,0 +1,10 @@
+$last-column-width: 130px;
+table > tbody > tr > td:last-of-type {
+  width: $last-column-width;
+}
+table form {
+  display: inline-block;
+}
+table > tbody > tr > td > .badge {
+  margin-top: 2px;
+}

@@ -1,0 +1,47 @@
+<div class="modal fade" id="addAlertsModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ path('supply.alerts.create',{id:entity.id}) }}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {{ form_widget(alertForm.alert, {checked: false}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {{ form_widget(alertForm.amount, {checked: false}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 alert-row">
+                        </div>
+                    </div>
+                    <input type="hidden" name="{{ alertForm._token.vars.full_name }}"
+                           value="{{ alertForm._token.vars.value }}"/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-info btn-block my-4" type="submit" disabled>
+                                <span class="plus-icon"></span>
+                                Dodaj
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success btn-block my-4" type="button" data-toggle="modal"
+                                    data-target="#alertsModal">Wybierz powiadomienie
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

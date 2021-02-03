@@ -1,0 +1,94 @@
+{% extends "theme/table-view.html.twig" %}
+{% block table_name %}Zapasy{% endblock %}
+ {% block table_nav %}
+     <form method="GET" action="{{ path('supply.index') }}">
+         <div class="row">
+             <div class="col-10 offset-1 col-md-5 offset-md-1">
+                 {{ form_widget(findForm.amountMin, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-md-0 col-md-5">
+                 {{ form_widget(findForm.amountMax, {checked: false}) }}
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-10 offset-1 col-md-5 offset-md-1 multi-select-col">
+                 {{ form_widget(findForm.products, {checked: false}) }}
+             </div>
+             <div class="col-10 offset-1 offset-md-0 col-md-5 multi-select-col">
+                 {{ form_widget(findForm.measures, {checked: false}) }}
+             </div>
+         </div>
+         <div class="row justify-content-center ">
+             <div class="col-10 col-sm-5 col-lg-3">
+                 <button class="btn btn-info btn-block my-4 waves-effect waves-light" type="submit">
+                     <span class="search-icon"></span>
+                     Szukaj
+                 </button>
+             </div>
+             <div class="col-lg-4 d-none d-lg-block">
+                 {{ paginate(paginator) }}
+             </div>
+             <div class="col-10 col-sm-5 col-lg-3">
+                 <button class="btn btn-default btn-block my-4 waves-effect waves-light clear-button" type="button">
+                     <span class="clear-icon"></span>
+                     Czyść
+                 </button>
+             </div>
+             <div class="col-10 d-lg-none">
+                 {{ paginate(paginator) }}
+             </div>
+         </div>
+     </form>
+ {% endblock %}
+{% block table_header %}
+    <th>Produkt</th>
+    <th>Stan</th>
+    <th>Jednostka</th>
+    <th>Powiadomienia</th>
+    <th></th>
+{% endblock %}
+{% block table_body %}
+    {% for supply in paginator.getPage() %}
+        <tr>
+            <td>
+                <span data-toggle="modal" data-product="{{ supply.product.id }}" data-target="#productModal" class="modal-product">
+                    {{ supply.product.name }}
+                </span>
+            </td>
+            <td>{{ supply.amount }} {{ supply.product.measure.shortcut }}</td>
+            <td>
+                <span data-toggle="modal" data-measure="{{ supply.product.measure.id }}" data-target="#measureModal" class="modal-measure">
+                    {{ supply.product.measure.name }}
+                </span>
+            </td>
+            <td>{{ supply.alerts|length }}</td>
+            {% embed 'theme/manageColumn.html.twig' %}
+                {% block editPath %}{{ path('supply.show',{id:supply.id}) }}{% endblock %}
+                {% block deletePath %}{{ path('supply.delete',{id:supply.id}) }}{% endblock %}
+            {% endembed %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5" class="text-center">
+                Brak zapasów
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block right_col %}
+    {% include 'supplies/form.html.twig' %}
+{% endblock %}
+{% block modals %}
+    {% include 'modals/delete.html.twig' %}
+    {% include 'modals/measure.html.twig' %}
+    {% include 'modals/product.html.twig' %}
+    {% include 'modals/error.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/supplies/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/supplies/index.js') }}"></script>
+{% endblock %}

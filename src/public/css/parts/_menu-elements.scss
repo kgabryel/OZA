@@ -1,0 +1,7 @@
+$element-color:#039BE5;
+$menu-elements: measures, shops, stuffs, products, shopping, alerts, lists, quick-lists, supply;
+@each $element in $menu-elements{
+  body.#{$element} .menu-element.#{$element} {
+    background-color: $element-color;
+  }
+}

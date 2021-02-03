@@ -1,0 +1,17 @@
+{% block material_date_widget %}
+    <div class="md-form form-lg date-container">
+        <input type="date"
+               class="date_input {{ errors|length|checkInput(checked) }}"
+               name="{{ full_name }}"
+                {% if value!='' %}
+                    value="{{ value }}"
+                {% endif %}
+               placeholder="{{ label }}"
+        />
+        {% for error in errors %}
+            <small class="form-text text-danger">
+                {{ error.message }}
+            </small>
+        {% endfor %}
+    </div>
+{% endblock %}

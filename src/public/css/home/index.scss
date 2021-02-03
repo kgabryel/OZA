@@ -1,0 +1,25 @@
+@import "../components/card";
+@import "../components/button-rounded";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/btn-icon/plus-icon";
+@import "../components/btn-icon/save-icon";
+@import "../components/btn-icon/uncheck-icon";
+table > tbody > tr > td:last-of-type, table > tbody > tr > td:nth-child(2) {
+  width: 65px;
+}
+
+table td > .alert {
+  margin-bottom: 0;
+}
+
+.card-cont > p {
+  margin-bottom: 0;
+}
+.card-cont > p:first-of-type {
+  margin-top: 15px;
+}
+.card-cont{
+  padding-left: 10px;
+  padding-right: 10px;
+}

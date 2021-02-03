@@ -1,0 +1,31 @@
+<nav class="navbar sticky-top navbar-dark top-bar">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" id="menu-btn">
+        <div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
+    </button>
+
+    <a href="{{ path('home.index') }}">
+        <img src="{{ asset('img/logo.png') }}" alt="logo"/>
+    </a>
+    <ul class="navbar-nav ml-auto nav-flex-icons user-info">
+        {% if activeAlerts|length > 0 %}
+        <li class="nav-item notification" data-target="#notificationModal" data-toggle="modal">
+            <span class="notification-count text-center">{{ activeAlerts|length }}</span>
+            <span class="bell-icon"></span>
+        </li>
+        {% endif %}
+        <li class="nav-item logout-big">
+            <a href="{{ path('logout') }}">
+                <button class="btn btn-outline-white btn-sm my-0 float-right" type="button">Wyloguj</button>
+            </a>
+        </li>
+
+        <li class="nav-item logout-small">
+            <a href="{{ path('logout') }}">
+                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,20 @@
+@import "../components/lists/fullModal";
+@import "../parts/lists";
+
+/* input edycja/dodawanie */
+.position{
+    margin-top: 10px;
+}
+/* input edycja/dodawanie */
+.position > div{
+    margin-bottom: 0;
+}
+
+/* input edycja/dodawanie */
+.position > button {
+    margin-top: 0 !important;
+}
+
+#editModal .add-button{
+    margin-top: 10px;
+}

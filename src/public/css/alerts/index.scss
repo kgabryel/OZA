@@ -1,0 +1,62 @@
+@import "../components/button-rounded";
+@import "../components/card";
+@import "../components/content-table";
+@import "../components/material-select";
+@import "../components/btn-icon/trash-icon";
+@import "../components/btn-icon/edit-icon";
+@import "../components/btn-icon/search-icon";
+@import "../components/btn-icon/clear-icon";
+@import "../components/btn-icon/save-icon";
+@import "../components/material-switch";
+@import "../components/material-textarea";
+@import "../parts/paginator";
+@import "../components/multi-select";
+@import "../parts/table";
+
+table > tbody > tr > td:nth-child(2) {
+  width: 130px;
+}
+
+.type-select, .active-switch {
+  display: inline-block;
+}
+
+
+.type-select {
+  width: calc(100% - 210px);
+}
+
+.active-switch {
+  position: absolute;
+  top: 35px;
+  width: 200px;
+  padding-left: 10px;
+}
+
+@media only screen and (max-width: 540px) {
+  .type-select, .active-switch {
+    display: block;
+    width: 100%;
+  }
+  .active-switch {
+    position: relative;
+    top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1300px) {
+  .type-select, .active-switch {
+    display: block;
+    width: 100%;
+  }
+  .active-switch {
+    position: relative;
+    top: 10px;
+  }
+}
+
+table td > .alert {
+  margin-bottom: 0;
+}

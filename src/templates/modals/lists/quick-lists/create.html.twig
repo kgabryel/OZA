@@ -1,0 +1,30 @@
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nowa lista zakupów</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{ path('quick-lists.create') }}">
+                <div class="modal-body add-form scrollbar-primary">
+                    {{ form_widget(form.name, {checked: createChecked}) }}
+                    {{ form_widget(form.products, {checked: createChecked}) }}
+                    <input type="hidden" name="{{ form._token.vars.full_name }}"
+                           value="{{ form._token.vars.value }}"/>
+                    <button type="button" class="btn btn-primary btn-block add-button">
+                        <span class="plus-icon"></span>
+                        Dodaj Produkt
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span class="save-icon"></span>
+                        Utwórz
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

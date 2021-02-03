@@ -1,0 +1,98 @@
+{% extends "theme/table-view.html.twig" %}
+{% block table_name %}Powiadomienia{% endblock %}
+{% block table_nav %}
+    <form method="GET" action="{{ path('alerts.index') }}">
+        <div class="row">
+            <div class="col-10 offset-1">
+                {{ form_widget(findForm.description, {checked: false}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1 col-sm-5 offset-sm-1 multi-select-col">
+                {{ form_widget(findForm.statuses, {checked: false}) }}
+            </div>
+            <div class="col-10 offset-1 offset-sm-0 col-sm-5 multi-select-col">
+                {{ form_widget(findForm.types, {checked: false}) }}
+            </div>
+        </div>
+
+        <div class="row justify-content-center ">
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-info btn-block my-4 waves-effect waves-light" type="submit">
+                    <span class="search-icon"></span>
+                    Szukaj
+                </button>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block">
+                {{ paginate(paginator) }}
+            </div>
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-default btn-block my-4 waves-effect waves-light clear-button" type="button">
+                    <span class="clear-icon"></span>
+                    Czyść
+                </button>
+            </div>
+            <div class="col-10 d-lg-none">
+                {{ paginate(paginator) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block table_header %}
+    <th>Treść</th>
+    <th>Czy aktywne</th>
+    <th></th>
+{% endblock %}
+{% block table_body %}
+    {% for alert in paginator.getPage() %}
+        <tr data-id="{{ alert.id }}">
+            <td>
+                <div class="alert alert-{{ alert.type.type }}" role="alert">
+                    {{ alert.description }}
+                </div>
+            </td>
+            <td class="align-middle">
+                <div class="material-switch">
+                    <div>Nie</div>
+                    <div class="switch">
+                        <input type="checkbox" class="switch__input" {% if alert.isActive %}checked="checked"{% endif %}>
+                        <label class="switch__label"></label>
+                    </div>
+                    <div>Tak</div>
+                </div>
+            </td>
+            {% embed 'theme/manageColumn.html.twig' %}
+                {% block editPath %}{{ path('alerts.show',{id:alert.id}) }}{% endblock %}
+                {% block deletePath %}{{ path('alerts.delete',{id:alert.id}) }}{% endblock %}
+            {% endembed %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3" class="text-center">
+                Brak powiadomień
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block right_col %}
+    {% embed 'alerts/form.html.twig' %}
+        {% block header %}Dodaj nowe powiadomienie{% endblock %}
+        {% block action %}{{ path("alerts.create") }}{% endblock %}
+        {% block button %}
+            <span class="save-icon"></span>
+            Dodaj
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+{% block modals %}
+    {% include 'modals/delete.html.twig' %}
+    {% include 'modals/error.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/alerts/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/alerts/index.js') }}"></script>
+{% endblock %}

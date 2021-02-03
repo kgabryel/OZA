@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+{% if app.session.getFlashBag().has('errorMessage') %}
+    {% set errorMessage = app.flashes('errorMessage') %}
+{% endif %}
+{% block body %}
+    <div class="container" style="margin-top:50px;">
+        <div class="row d-flex justify-content-center align-middle">
+            <div class="col-md-10 col-lg-6">
+                <form class="text-center rounded mb-0 z-depth-3 bg-white" action="{{ path('login.show') }}"
+                      method="POST">
+                    {% if errorMessage is defined %}
+                        <div class="alert alert-danger alert-dismissible fade show m-4 alert-hide" role="alert">
+                            {% for message in errorMessage %}
+                                <span>{{ message }}</span>
+                            {% endfor %}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <p class="h4 mb-4">Zaloguj się</p>
+                    <div class="md-form form-lg">
+                        <input type="email" id="login-input" class="form-control form-control-lg
+                            {% if app.session.getFlashBag().has('invalidEmail') %}
+                                {% if app.flashes('invalidEmail')[0] %}
+                                    is-invalid
+                                {% else %}
+                                    is-valid
+                                {% endif %}
+                            {% endif %}
+                        " name="email" value="{{ app.session.get('_security.last_username') }}"/>
+                        <label for="login-input">Adres E-mail</label>
+                        {% if app.session.getFlashBag().has('emailErrors') %}
+                            {% for message in app.flashes('emailErrors')[0] %}
+                                <small class="form-text text-danger">
+                                    {{ message }}
+                                </small>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="password" id="password-input" class="form-control form-control-lg
+                            {% if app.session.getFlashBag().has('invalidPassword') %}
+                                {% if app.flashes('invalidPassword') %}
+                                    is-invalid
+                                {% else %}
+                                    is-valid
+                                {% endif %}
+                            {% endif %}
+                        " name="password"/>
+                        <label for="password-input">Hasło</label>
+                        {% if app.session.getFlashBag().has('passwordErrors') %}
+                            {% for message in app.flashes('passwordErrors') %}
+                                <smaill class="form-text text-danger">
+                                    {{ message }}
+                                </smaill>
+                            {% endfor %}
+                        {% endif %}
+                        {% if app.session.getFlashBag().has('loginErrors') %}
+                            {% for message in app.flashes('loginErrors') %}
+                                <small class="form-text text-danger">
+                                    {{ message }}
+                                </small>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="remember_me" class="custom-control-input" name="_remember_me"/>
+                        <label class="custom-control-label" for="remember_me">Pozostań
+                            zalogowany</label>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <button class="btn btn-info btn-block my-4" type="submit">Zaloguj</button>
+                    <div class="d-flex justify-content-around">
+                        <p>Nie masz konta?
+                            <a href="{{ path('register.show') }}">Zarejestruj się</a>
+                        </p>
+                    </div>
+                    <a class="btn btn-block btn-social btn-facebook login-button" href="{{ path('fb.auth') }}">
+                        <i class="fab fa-facebook-f"></i>Zaloguj się przez Facebook
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-social.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login/index.css') }}">
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "theme/table-view.html.twig" %}
+{% block table_name %}Towary{% endblock %}
+{% block table_nav %}
+    <form method="GET" action="{{ path('stuffs.index') }}">
+        <div class="row">
+            <div class="col-10 offset-1 col-md-5 offset-md-1">
+                {{ form_widget(findForm.name, {checked: false}) }}
+            </div>
+            <div class="col-10 offset-1 offset-md-0 col-md-5 multi-select-col">
+                {{ form_widget(findForm.products, {checked: false}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1 col-md-5 offset-md-1 multi-select-col">
+                {{ form_widget(findForm.measures, {checked: false}) }}
+            </div>
+            <div class="col-10 offset-1 col-md-5 multi-select-col">
+                {{ form_widget(findForm.productMeasures, {checked: false}) }}
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-info btn-block my-4 waves-effect waves-light" type="submit">
+                    <span class="search-icon"></span>
+                    Szukaj
+                </button>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block">
+                {{ paginate(paginator) }}
+            </div>
+            <div class="col-10 col-sm-5 col-lg-3">
+                <button class="btn btn-default btn-block my-4 waves-effect waves-light clear-button" type="button">
+                    <span class="clear-icon"></span>
+                    Czyść
+                </button>
+            </div>
+            <div class="col-10 d-lg-none">
+                {{ paginate(paginator) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block table_header %}
+    <th>Nazwa</th>
+    <th>Produkt</th>
+    <th>Jednostka bazowa</th>
+    <th></th>
+{% endblock %}
+{% block table_body %}
+    {% for product in paginator.getPage() %}
+        <tr data-measure="{{ product.measure.id }}">
+            <td>{{ product.name }}</td>
+            <td data-id="{{ product.product.id }}">
+                    <span data-toggle="modal" data-target="#productModal" class="modal-product">
+                        {{ product.product.name }}
+                    </span>
+            </td>
+            <td>
+                    <span data-toggle="modal" data-target="#measureModal" class="modal-measure">
+                        {{ product.measure.name }}
+                    </span>
+            </td>
+            <td class="align-middle">
+                <a href="{{ path("stuffs.show",{id:product.id}) }}">
+                    <button type="button"
+                            class="btn btn-outline-white button-rounded btn-sm px-2 edit-button">
+                        <span class="edit-icon"></span>
+                    </button>
+                </a>
+                <form action="{{ path("stuffs.delete",{id:product.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit"
+                            class="btn btn-outline-white button-rounded btn-sm px-2 delete-button"
+                            data-toggle="modal"
+                            data-target="#deleteModal">
+                        <span class="trash-icon"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4" class="text-center">
+                Brak towarów
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block right_col %}
+    {% include 'stuffs/form.html.twig' %}
+{% endblock %}
+{% block modals %}
+    {% include 'modals/measure.html.twig' %}
+    {% include 'modals/product.html.twig' %}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/stuffs/index.css') }}"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('js/stuffs/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,24 @@
+.list .element > div {
+  display: inline-block;
+}
+
+.list .element.checked-element > .content-panel > p {
+  text-decoration: line-through;
+}
+
+.list .element > .content-panel {
+  padding: 5px;
+  width: calc(100% - 100.15px);
+}
+
+.list .element > .content-panel > p {
+  margin-bottom: 5px;
+}
+
+.list-content > hr, #fullModal span > hr {
+  margin: 5px;
+}
+
+.list-content > hr:last-of-type, #fullModal span > hr:last-of-type {
+  display: none;
+}

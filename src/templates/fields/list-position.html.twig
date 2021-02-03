@@ -1,0 +1,44 @@
+{% block list_position_widget %}
+    <input type="hidden" value="{{ value.position }}" name="{{ full_name }}[position]"/>
+    <input type="hidden" value="{{ value.amount }}" name="{{ full_name }}[amount]"/>
+    <input type="hidden" value="{{ value.measure }}" name="{{ full_name }}[measure]"/>
+    <input type="hidden" value="{{ value.type }}" name="{{ full_name }}[type]"/>
+    {% for alert in value.alerts %}
+        <input type="hidden" class="alert" value="{{ alert }}" name="{{ full_name }}[alerts][{{ loop.index0 }}]"/>
+    {% endfor %}
+    <div class="show">
+        <div class="md-form form-lg">
+        <textarea id="{{ full_name }}" class="md-textarea form-control {{ errors|length|checkInput(checked) }}"
+                  name="productText"
+                  rows="1" disabled>{% if form.vars.valid %}{{ positionValue(data) }}{% else %}Pozycja posiada błędy{% endif %}</textarea>
+            <label for="{{ full_name }}" class="active">
+                {% if form.vars.valid %}
+                    {% if value.type=='Produkt' %}Produkt{% else %}Towar{% endif %}
+                {% endif %}
+            </label>
+            {% for error in errors %}
+                <small class="form-text text-danger">
+                    {{ error.message }}
+                </small>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button"
+                class="btn btn-primary btn-block square-btn"
+                data-toggle="modal"
+                data-target="#productModal">
+            <span class="edit-icon"></span>
+        </button>
+        <button type="button"
+                class="btn btn-danger btn-block square-btn">
+            <span class="trash-icon"></span>
+        </button>
+        <button type="button"
+                data-toggle="modal"
+                data-target="#positionAlertModal"
+                class="btn btn-warning btn-block square-btn">
+            <span class="alert-icon"></span>
+        </button>
+    </div>
+{% endblock %}

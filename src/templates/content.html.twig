@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ parent()}}
+    <link rel="stylesheet" href="{{ asset('css/animated-menu-btn.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/common/theme.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/icon.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/material.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/getmdl-select.min.css') }}"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+{% endblock %}
+{% block body %}
+    {% include 'theme/top-bar.html.twig' %}
+    {% if app.session.getFlashBag().has('successMessage') %}
+        {% set successMessage = app.flashes('successMessage') %}
+    {% endif %}
+    {% if app.session.getFlashBag().has('errorMessage') %}
+        {% set errorMessage = app.flashes('errorMessage') %}
+    {% endif %}
+<div class="container-fluid content">
+    {% if successMessage is defined %}
+    <div class="alert alert-success alert-dismissible fade show m-4 alert-hide" role="alert">
+        {% for message in successMessage %}
+            <span>{{ message }}</span>{% if not loop.last %}<br/>{% endif %}
+        {% endfor %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% if errorMessage is defined %}
+        <div class="alert alert-danger alert-dismissible fade show m-4 alert-hide" role="alert">
+            {% for message in errorMessage %}
+                <span>{{ message }}</span>{% if not loop.last %}<br/>{% endif %}
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    {% include 'modals/notification.html.twig' %}
+</div>
+{% include 'theme/menu.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/theme.js') }}"></script>
+{% endblock %}

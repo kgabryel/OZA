@@ -1,0 +1,15 @@
+{% block text_widget %}
+    <div class="md-form form-lg">
+        <input type="text" id="{{ full_name }}" class="form-control form-control-lg
+        {{ errors|length|checkInput(checked) }}"
+               name="{{ full_name }}"
+               value="{{ value }}"
+        />
+        <label for="{{ full_name }}" {% if value != '' %}class="active"{% endif %}>{{ label }}</label>
+        {% for error in errors %}
+            <small class="form-text text-danger">
+                {{ error.message }}
+            </small>
+        {% endfor %}
+    </div>
+{% endblock %}

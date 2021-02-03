@@ -1,0 +1,21 @@
+.content-table > table > tbody > tr > td{
+  height: 30px;
+  padding: 10px;
+}
+.content-table > table > tbody > tr > td:last-child{
+  padding: 0;
+}
+.content-table >table > tbody > tr > td:last-child{
+  width: 90px;
+}
+
+.content-table {
+  max-width: 600px;
+  min-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.content-table > table {
+  min-width: 600px;
+}

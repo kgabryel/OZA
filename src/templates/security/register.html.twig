@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    {% if app.session.getFlashBag().has('checked') %}
+        {% set checked = app.flashes('checked') %}
+    {% endif %}
+    <div class="container" style="margin-top:50px;">
+        <div class="row d-flex justify-content-center align-middle">
+            <div class="col-md-10 col-lg-6">
+                <form class="text-center p-5 rounded mb-0 z-depth-3 bg-white" action="{{ path('register.register') }}"
+                      method="POST">
+                    <p class="h4 mb-4">Zarejestruj się</p>
+                    <div class="md-form form-lg">
+                        <input type="email" id="email-input" class="form-control form-control-lg
+                        {% if checked is defined %}
+                            {% if form.email.vars.errors|length >0 %}
+                                is-invalid
+                            {% else %}
+                                is-valid
+                            {% endif %}
+                        {% endif %}
+                        " name="{{ form.email.vars.full_name }}"/>
+                        <label for="email-input">Adres E-mail</label>
+                        {% for error in form.email.vars.errors %}
+                            <small class="form-text text-danger">
+                                {{ error.message }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="password" id="password-input" class="form-control form-control-lg
+                        {% if checked is defined %}
+                            {% if form.password.vars.errors|length >0 %}
+                                is-invalid
+                            {% else %}
+                                is-valid
+                            {% endif %}
+                        {% endif %}
+                        " name="{{ form.password.first.vars.full_name }}"/>
+                        <label for="password-input">Hasło</label>
+                        {% for error in form.password.vars.errors %}
+                            <small class="form-text text-danger align-left">
+                                {{ error.message }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="password" id="password-r-input" class="form-control form-control-lg
+                        {% if checked is defined %}
+                            {% if form.password.vars.errors|length >0 %}
+                                is-invalid
+                            {% else %}
+                                is-valid
+                            {% endif %}
+                        {% endif %}
+                        " name="{{ form.password.second.vars.full_name }}"/>
+                        <label for="password-r-input">Powtórz hasło</label>
+                    </div>
+                    <button class="btn btn-info btn-block my-4" type="submit">Załóż konto</button>
+                    <div class="d-flex justify-content-around">
+                        <p>Masz już konto?
+                            <a href="{{ path('login.show') }}">Zaloguj się</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

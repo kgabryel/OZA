@@ -1,0 +1,13 @@
+{% block multi_select_widget %}
+    <select class="selectpicker form-control" id="{{ name }}_select" multiple data-live-search="true" data-actions-box="true"
+            data-select-all-text="Wszystkie" data-deselect-all-text="Żadne" name="{{ full_name }}" title="{{ label }}">
+        {% for choice in choices %}
+            <option value="{{ choice.value }}" name="{{ full_name }}[{{ loop.index0 }}]"
+                    {% if choice.value in value %}
+                        selected
+                    {% endif %}
+            >
+                {{ choice.label }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}
